@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+
+{% block content %}
+
+    <div class="row">
+      <div class="col">
+        <div class="col-md">
+          <div class="card text-center text-black  mb-3" id="total-orders">
+              <div class="card-header">
+                <h5 class="card-title">Всего BASIC альбомов</h5>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{post_count}}</h3>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-md">
+          <div class="card text-center text-black  mb-3" id="orders-delivered">
+              <div class="card-header">
+                <h5 class="card-title">Всего альбомов PRO</h5>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{prems_count}}</h3>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-md">
+          <div class="card text-center text-black  mb-3" id="orders-pending">
+              <div class="card-header">
+                <h5 class="card-title">Всего VIP альбомов</h5>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{vips_count}}</h3>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-md">
+          <div class="card text-center text-black  mb-3" >
+              <div class="card-header">
+                <h5 class="card-title">Всего FULL альбомов</h5>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{full_count}}</h3>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+        <div class="row">
+          <div class="col">
+            <div class="card card-body">
+              <form method="get">
+                {{myFilter.form}}
+
+                <button type="submit" class="btn btn-primary">Поиск</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% for category in categories %}
+        <h3>{{category.name}}</h3>
+        {% if category.name == "Фотоальбом Basic" %}
+        <div class="row row-cols-1 row-cols-md-2">
+            {% for post in posts %}
+            <div class="col mb-4">
+              <div class="card">
+                <div class="view overlay">
+                  <img class="card-img-top" src="{{post.image.url}}" alt="">
+                  <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">{{post.title}}</h4>
+                  <p class="card-text">{{post.description}}</p>
+                  <a href="{% url 'detail' post.id %}" class="btn btn-primary btn-md">Read more</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% if request.user|has_group:"admin" or request.user|has_group:"customer" %}
+              <a class="btn btn-success" href="{% url 'createfull-post' %}">Создать пост</a>
+          {% endif %}
+          {% elif category.name == "Фотоальбом PRO" %}
+            <div class="row row-cols-1 row-cols-md-2">
+              {% for prem in prems %}
+              <div class="col mb-4">
+                <div class="card">
+                  <div class="view overlay">
+                    <img class="card-img-top" src="{{prem.image.url}}" alt="">
+                    <a href="#!">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">{{prem.title}}</h4>
+                    <p class="card-text">{{prem.description}}</p>
+                    <a href="{% url 'premdet' prem.id %}" class="btn btn-primary btn-md">Read more</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% if request.user|has_group:"admin" or request.user|has_group:"customer" %}
+              <a class="btn btn-success" href="{% url 'createfull-post' %}">Создать пост</a>
+            {% endif %}
+          {% elif category.name == "Фотоальбом VIP" %}
+            <div class="row row-cols-1 row-cols-md-2">
+              {% for vip in vips %}
+              <div class="col mb-4">
+                <div class="card">
+                  <div class="view overlay">
+                    <img class="card-img-top" src="{{vip.image.url}}" alt="">
+                    <a href="#!">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">{{vip.title}}</h4>
+                    <p class="card-text">{{vip.description}}</p>
+                    <a href="{% url 'vipdetail' vip.id %}" class="btn btn-primary btn-md">Read more</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% if request.user|has_group:"admin" or request.user|has_group:"customer" %}
+              <a class="btn btn-success" href="{% url 'createfull-post' %}">Создать пост</a>
+            {% endif %}
+          {% elif category.name == "Фотоальбом FULL" %}
+            <div class="row row-cols-1 row-cols-md-2">
+              {% for full in fulls %}
+              <div class="col mb-4">
+                <div class="card">
+                  <div class="view overlay">
+                    <img class="card-img-top" src="{{full.image.url}}" alt="">
+                    <a href="#!">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">{{full.title}}</h4>
+                    <p class="card-text">{{full.description}}</p>
+                    <a href="{% url 'fulldetail' full.id %}" class="btn btn-primary btn-md">Read more</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% if request.user|has_group:"admin" or request.user|has_group:"customer" %}
+              <a class="btn btn-success" href="{% url 'createfull-post' %}">Создать пост</a>
+            {% endif %}
+
+          {% endif %}
+          {% endfor %}
+          
+    </div>
+
+    <div id="container" style="width: 75%;">
+      <canvas id="pie-chart"></canvas>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+  
+      var config = {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: [3, 2, 2, 3],
+            backgroundColor: [
+              '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+            ],
+            label: 'Population'
+          }],
+          labels: ['BASIC', 'PRO', 'VIP', 'FULL']
+        },
+        options: {
+          responsive: true
+        }
+      };
+  
+      window.onload = function() {
+        var ctx = document.getElementById('pie-chart').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+      };
+  
+    </script>
+    
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+    {% load static %}
+{% block content %}
+
+    <div class="container main__about" style="
+        max-width: 100%;
+        min-height: 70vh;
+        background: url({% static '../media/images/main__image.jpg' %}) center no-repeat;
+            background-size: cover;
+        display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            "
+
+    >
+        <div class="main__info" style="
+            color: #fff;
+            text-align: center;
+        ">
+            <h2 style="font-size: 42px">PhotoprinT</h2>
+            <p style="width: 600px; font-size: 20px">PhotoprinT - Это один из лучших сервисов по созданию фотоальбомов!
+                У нас вы можете создать фотоальбом на любой вкус! Более 3ех способов составления фотоальбомов!
+                Всё качественно, эффективно и быстро!</p>
+        </div>
+
+    </div>
+
+        <div class="container py-4">
+            <h1>Ваша роль - смотритель!</h1>
+            <span>Ваши возможности:</span>
+            <ul>
+                <li>Вы можете отправить форму на сайте</li>
+                <li>Вы можете просматрировать существующие альбомы</li>
+                <li>Вы можете выйти из аккаунта)</li>
+            </ul>
+        </div>
+
+{% endblock %}
+

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+    <div class="container main__about" style="
+        max-width: 100%;
+        min-height: 70vh;
+        background: url({% static '../media/images/main__image.jpg' %}) center no-repeat;
+            background-size: cover;
+        display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            "
+
+    >
+        <div class="main__info" style="
+            color: #fff;
+            text-align: center;
+        ">
+            <h2 style="font-size: 42px">PhotoprinT</h2>
+            <p style="width: 600px; font-size: 20px">PhotoprinT - Это один из лучших сервисов по созданию фотоальбомов!
+                У нас вы можете создать фотоальбом на любой вкус! Более 3ех способов составления фотоальбомов!
+                Всё качественно, эффективно и быстро!</p>
+        </div>
+
+    </div>
+
+
+    <div class="category" style="
+            max-width: 100%;
+            min-height: 1024px;
+            margin-top: 60px;
+
+        ">
+            <div class="category__title" style="text-align: center">
+                <h2 style="font-size: 48px">Категории</h2>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 d-flex justify-content-center">
+              <div class="col">
+                <div class="card h-100">
+                  <img src="../media/images/card1.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title">Фотоальбом Basic</h5>
+                    <p class="card-text">Данный фотоальбом предназначен для событийных мероприятий. <br><br> Вмещает в себя до 6 фото, каждое весом до 3МБ</p>
+                      <a href="{% url 'create-post' %}" class="btn btn-primary">Создать</a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="../media/images/card2.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title">Фотоальбом PRO</h5>
+                    <p class="card-text">Данный фотоальбом предназначен для фоток с путешествий и т.п. <br><br> Вмещает в себя до 12 фото, каждое весом до 4МБ</p>
+                      <a href="{% url 'createprem-post' %}" class="btn btn-primary">Создать</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="../media/images/card3.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title">Фотоальбом VIP</h5>
+                    <p class="card-text">Запечетлите даже самые маленькие моменты из своей жизни и вложите их в альбом!
+                        <br><br> Вмещает в себя до 20 фото, каждое весом до 5МБ</p>
+                      <a href="{% url 'createvip-post' %}" class="btn btn-primary">Создать</a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="../media/images/card4.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title">Фотоальбом FULL</h5>
+                    <p class="card-text">Фотоальбом на всю жизнь! Весь ваш жизненный опыт в одном альбоме!
+                        <br><br> Вмещает в себя до 30 фото, каждое весом до 8МБ</p>
+                      <a href="{% url 'createfull-post' %}" class="btn btn-primary">Создать</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+
+{% endblock %}
